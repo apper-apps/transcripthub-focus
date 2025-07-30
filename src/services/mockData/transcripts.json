@@ -1,0 +1,232 @@
+[
+  {
+    "Id": 1,
+    "audioFileId": 1,
+    "content": "Complete transcript content for team meeting Q1 review...",
+    "status": "completed",
+    "createdAt": "2024-03-15T10:45:00Z",
+    "speakers": [
+      {
+        "id": "speaker_1",
+        "name": "John Smith",
+        "color": "#5B47E0",
+        "segments": [
+          {
+            "text": "Good morning everyone, thank you for joining our Q1 review meeting. Let's start by going over our key performance indicators for this quarter.",
+            "startTime": 15,
+            "endTime": 28
+          },
+          {
+            "text": "I'm pleased to report that we've exceeded our revenue targets by 12% this quarter, which is a significant achievement for the team.",
+            "startTime": 145,
+            "endTime": 158
+          }
+        ]
+      },
+      {
+        "id": "speaker_2",
+        "name": "Sarah Johnson",
+        "color": "#F59E0B",
+        "segments": [
+          {
+            "text": "That's fantastic news, John. From the marketing perspective, our new campaign contributed significantly to those results.",
+            "startTime": 30,
+            "endTime": 42
+          },
+          {
+            "text": "We saw a 45% increase in lead generation compared to Q4 last year, and our conversion rates improved by 18%.",
+            "startTime": 160,
+            "endTime": 175
+          }
+        ]
+      },
+      {
+        "id": "speaker_3",
+        "name": "Mike Chen",
+        "color": "#10B981",
+        "segments": [
+          {
+            "text": "The development team also delivered all our planned features on time. We had zero critical bugs in production this quarter.",
+            "startTime": 45,
+            "endTime": 58
+          },
+          {
+            "text": "Our new deployment pipeline reduced our release cycle from two weeks to three days, which really improved our agility.",
+            "startTime": 180,
+            "endTime": 195
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "audioFileId": 2,
+    "content": "Complete transcript content for client interview project alpha...",
+    "status": "completed",
+    "createdAt": "2024-03-14T14:35:00Z",
+    "speakers": [
+      {
+        "id": "speaker_1",
+        "name": "Alex Rivera",
+        "color": "#5B47E0",
+        "segments": [
+          {
+            "text": "Thank you for taking the time to speak with us about Project Alpha. Could you start by telling us about your current challenges?",
+            "startTime": 10,
+            "endTime": 22
+          }
+        ]
+      },
+      {
+        "id": "speaker_2",
+        "name": "Client Representative",
+        "color": "#F59E0B",
+        "segments": [
+          {
+            "text": "Certainly. Our main challenge is scaling our customer support operations. We're currently handling about 500 tickets per day, but we expect that to double in the next six months.",
+            "startTime": 25,
+            "endTime": 42
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "audioFileId": 3,
+    "content": "Complete transcript content for machine learning lecture...",
+    "status": "completed",
+    "createdAt": "2024-03-13T09:30:00Z",
+    "speakers": [
+      {
+        "id": "speaker_1",
+        "name": "Dr. Emily Watson",
+        "color": "#5B47E0",
+        "segments": [
+          {
+            "text": "Welcome to Introduction to Machine Learning. Today we'll be covering the fundamental concepts that form the foundation of modern AI systems.",
+            "startTime": 5,
+            "endTime": 18
+          },
+          {
+            "text": "Machine learning is a subset of artificial intelligence that enables computers to learn and improve from experience without being explicitly programmed.",
+            "startTime": 25,
+            "endTime": 40
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 5,
+    "audioFileId": 5,
+    "content": "Complete transcript content for marketing conference call...",
+    "status": "completed",
+    "createdAt": "2024-03-11T11:15:00Z",
+    "speakers": [
+      {
+        "id": "speaker_1",
+        "name": "Marketing Director",
+        "color": "#5B47E0",
+        "segments": [
+          {
+            "text": "Let's review our Q2 marketing strategy. We need to focus on digital channels and improve our social media presence.",
+            "startTime": 12,
+            "endTime": 25
+          }
+        ]
+      },
+      {
+        "id": "speaker_2",
+        "name": "Social Media Manager",
+        "color": "#F59E0B",
+        "segments": [
+          {
+            "text": "I've prepared a comprehensive plan for increasing our engagement rates across all platforms. We're targeting a 30% increase in followers this quarter.",
+            "startTime": 28,
+            "endTime": 45
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 8,
+    "audioFileId": 8,
+    "content": "Complete transcript content for customer feedback session...",
+    "status": "completed",
+    "createdAt": "2024-03-08T15:35:00Z",
+    "speakers": [
+      {
+        "id": "speaker_1",
+        "name": "Product Manager",
+        "color": "#5B47E0",
+        "segments": [
+          {
+            "text": "Thank you all for joining this feedback session. We value your input as we continue to improve our product offerings.",
+            "startTime": 8,
+            "endTime": 20
+          }
+        ]
+      },
+      {
+        "id": "speaker_2",
+        "name": "Customer A",
+        "color": "#F59E0B",
+        "segments": [
+          {
+            "text": "Overall, we're very satisfied with the service. The main area for improvement would be the mobile app experience.",
+            "startTime": 25,
+            "endTime": 38
+          }
+        ]
+      },
+      {
+        "id": "speaker_3",
+        "name": "Customer B",
+        "color": "#10B981",
+        "segments": [
+          {
+            "text": "I agree with that feedback. The desktop version is excellent, but the mobile app could use some performance optimizations.",
+            "startTime": 42,
+            "endTime": 55
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 9,
+    "audioFileId": 9,
+    "content": "Complete transcript content for training session onboarding...",
+    "status": "completed",
+    "createdAt": "2024-03-07T11:00:00Z",
+    "speakers": [
+      {
+        "id": "speaker_1",
+        "name": "HR Manager",
+        "color": "#5B47E0",
+        "segments": [
+          {
+            "text": "Welcome to our comprehensive onboarding program. Over the next few hours, we'll cover company policies, procedures, and culture.",
+            "startTime": 15,
+            "endTime": 30
+          }
+        ]
+      },
+      {
+        "id": "speaker_2",
+        "name": "New Employee",
+        "color": "#F59E0B",
+        "segments": [
+          {
+            "text": "Thank you for the warm welcome. I'm excited to learn about the company and contribute to the team's success.",
+            "startTime": 35,
+            "endTime": 48
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 1,
+    "name": "Business Meetings",
+    "parentId": null,
+    "createdAt": "2024-03-01T10:00:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "Educational Content",
+    "parentId": null,
+    "createdAt": "2024-03-02T14:30:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Podcast Episodes",
+    "parentId": null,
+    "createdAt": "2024-03-03T09:15:00Z"
+  },
+  {
+    "Id": 4,
+    "name": "Client Calls",
+    "parentId": 1,
+    "createdAt": "2024-03-04T11:45:00Z"
+  },
+  {
+    "Id": 5,
+    "name": "Team Standups",
+    "parentId": 1,
+    "createdAt": "2024-03-05T08:20:00Z"
+  },
+  {
+    "Id": 6,
+    "name": "Lectures",
+    "parentId": 2,
+    "createdAt": "2024-03-06T16:10:00Z"
+  },
+  {
+    "Id": 7,
+    "name": "Training Materials",
+    "parentId": 2,
+    "createdAt": "2024-03-07T13:25:00Z"
+  }
+]

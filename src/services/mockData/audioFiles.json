@@ -1,0 +1,112 @@
+[
+  {
+    "Id": 1,
+    "name": "team-meeting-q1-review.mp3",
+    "originalName": "team-meeting-q1-review.mp3",
+    "size": 15728640,
+    "duration": 2340,
+    "format": "mp3",
+    "uploadDate": "2024-03-15T10:30:00Z",
+    "status": "completed",
+    "folderId": 1
+  },
+  {
+    "Id": 2,
+    "name": "client-interview-project-alpha.wav",
+    "originalName": "client-interview-project-alpha.wav",
+    "size": 28934592,
+    "duration": 1800,
+    "format": "wav",
+    "uploadDate": "2024-03-14T14:20:00Z",
+    "status": "completed",
+    "folderId": 1
+  },
+  {
+    "Id": 3,
+    "name": "lecture-machine-learning-intro.m4a",
+    "originalName": "lecture-machine-learning-intro.m4a",
+    "size": 42567424,
+    "duration": 3600,
+    "format": "m4a",
+    "uploadDate": "2024-03-13T09:15:00Z",
+    "status": "completed",
+    "folderId": 2
+  },
+  {
+    "Id": 4,
+    "name": "podcast-episode-12.mp3",
+    "originalName": "podcast-episode-12.mp3",
+    "size": 67108864,
+    "duration": 4500,
+    "format": "mp3",
+    "uploadDate": "2024-03-12T16:45:00Z",
+    "status": "processing",
+    "folderId": 3
+  },
+  {
+    "Id": 5,
+    "name": "conference-call-marketing.wav",
+    "originalName": "conference-call-marketing.wav",
+    "size": 18923648,
+    "duration": 1920,
+    "format": "wav",
+    "uploadDate": "2024-03-11T11:00:00Z",
+    "status": "completed",
+    "folderId": 1
+  },
+  {
+    "Id": 6,
+    "name": "webinar-digital-transformation.mp3",
+    "originalName": "webinar-digital-transformation.mp3",
+    "size": 52428800,
+    "duration": 5400,
+    "format": "mp3",
+    "uploadDate": "2024-03-10T13:30:00Z",
+    "status": "failed",
+    "folderId": 2
+  },
+  {
+    "Id": 7,
+    "name": "board-meeting-minutes.wav",
+    "originalName": "board-meeting-minutes.wav",
+    "size": 33554432,
+    "duration": 3900,
+    "format": "wav",
+    "uploadDate": "2024-03-09T08:00:00Z",
+    "status": "queued",
+    "folderId": null
+  },
+  {
+    "Id": 8,
+    "name": "customer-feedback-session.m4a",
+    "originalName": "customer-feedback-session.m4a",
+    "size": 25165824,
+    "duration": 2700,
+    "format": "m4a",
+    "uploadDate": "2024-03-08T15:20:00Z",
+    "status": "completed",
+    "folderId": 1
+  },
+  {
+    "Id": 9,
+    "name": "training-session-onboarding.mp3",
+    "originalName": "training-session-onboarding.mp3",
+    "size": 38797312,
+    "duration": 4200,
+    "format": "mp3",
+    "uploadDate": "2024-03-07T10:45:00Z",
+    "status": "completed",
+    "folderId": 2
+  },
+  {
+    "Id": 10,
+    "name": "interview-senior-developer.wav",
+    "originalName": "interview-senior-developer.wav",
+    "size": 21037056,
+    "duration": 2100,
+    "format": "wav",
+    "uploadDate": "2024-03-06T12:15:00Z",
+    "status": "processing",
+    "folderId": null
+  }
+]
