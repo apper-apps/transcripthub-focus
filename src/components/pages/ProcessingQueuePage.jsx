@@ -1,79 +1,35 @@
-import { useState, useEffect } from "react"
-import { toast } from "react-toastify"
-import ApperIcon from "@/components/ApperIcon"
-import Card from "@/components/atoms/Card"
-import Badge from "@/components/atoms/Badge"
-import Button from "@/components/atoms/Button"
-import Loading from "@/components/ui/Loading"
-import Error from "@/components/ui/Error"
-import Empty from "@/components/ui/Empty"
-import { audioFileService } from "@/services/api/audioFileService"
-import { formatFileSize, formatDuration, formatDate } from "@/utils/formatters"
-import { cn } from "@/utils/cn"
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { audioFileService } from "@/services/api/audioFileService";
+import ApperIcon from "@/components/ApperIcon";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
+import Empty from "@/components/ui/Empty";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
+import { cn } from "@/utils/cn";
+import { formatDate, formatDuration, formatFileSize, getStatusColor } from "@/utils/formatters";
 
-const ProcessingQueuePage = () => {
+function ProcessingQueuePage() {
   const [files, setFiles] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState("")
-  const [filter, setFilter] = useState("all") // all, queued, processing, completed, failed
+  const [error, setError] = useState(null)
+  const [filter, setFilter] = useState("all")
 
-  const loadData = async () => {
-    try {
-      setLoading(true)
-      setError("")
-      const filesData = await audioFileService.getAll()
-      setFiles(filesData)
-    } catch (err) {
-      setError("Failed to load processing queue. Please try again.")
-      console.error("Error loading queue:", err)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    loadData()
-    
-    // Poll for updates every 5 seconds
-    const interval = setInterval(loadData, 5000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const handleRetryFile = async (fileId) => {
-    try {
-      const updatedFile = await audioFileService.update(fileId, { status: "queued" })
-      setFiles(prev => prev.map(f => f.Id === fileId ? updatedFile : f))
-      toast.success("File queued for retry")
-    } catch (err) {
-      toast.error("Failed to retry file")
-      console.error("Retry error:", err)
-    }
-  }
-
-  const handleCancelFile = async (fileId) => {
-    try {
-      await audioFileService.delete(fileId)
-      setFiles(prev => prev.filter(f => f.Id !== fileId))
-      toast.success("File removed from queue")
-    } catch (err) {
-      toast.error("Failed to cancel file")
-      console.error("Cancel error:", err)
-    }
-  }
-
-  const filteredFiles = files.filter(file => {
-    if (filter === "all") return true
-    return file.status === filter
-  })
-
+  // Computed values
   const stats = {
     total: files.length,
-    queued: files.filter(f => f.status === "queued").length,
-    processing: files.filter(f => f.status === "processing").length,
-    completed: files.filter(f => f.status === "completed").length,
-    failed: files.filter(f => f.status === "failed").length
+    queued: files.filter(f => f.status === 'queued').length,
+    processing: files.filter(f => f.status === 'processing').length,
+    completed: files.filter(f => f.status === 'completed').length,
+    failed: files.filter(f => f.status === 'failed').length
   }
 
+  const filteredFiles = filter === "all" 
+    ? files 
+    : files.filter(file => file.status === filter)
+  // Helper functions
   const getStatusIcon = (status) => {
     switch (status) {
       case "completed":
@@ -103,7 +59,61 @@ const ProcessingQueuePage = () => {
         return "default"
     }
   }
+// Load processing queue data
+  useEffect(() => {
+    loadData()
+    
+    // Poll for updates every 5 seconds
+    const interval = setInterval(loadData, 5000)
+    return () => clearInterval(interval)
+  }, [])
 
+  const loadData = async () => {
+    try {
+      setError(null)
+      const filesData = await audioFileService.getProcessingQueue()
+      setFiles(filesData)
+    } catch (err) {
+      console.error('Failed to load processing queue:', err)
+      setError('Failed to load processing queue')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleRetryFile = async (fileId) => {
+    try {
+      await audioFileService.retryProcessing(fileId)
+      toast.success('File queued for retry')
+      
+      // Update the file status locally
+      setFiles(prevFiles => 
+        prevFiles.map(file => 
+          file.id === fileId 
+            ? { ...file, status: 'queued', progress: 0 }
+            : file
+        )
+      )
+    } catch (err) {
+      console.error('Failed to retry file:', err)
+      toast.error('Failed to retry file processing')
+    }
+  }
+
+  const handleCancelFile = async (fileId) => {
+    try {
+      await audioFileService.cancelProcessing(fileId)
+      toast.success('File processing cancelled')
+      
+      // Remove the file from the queue
+      setFiles(prevFiles => prevFiles.filter(file => file.id !== fileId))
+    } catch (err) {
+      console.error('Failed to cancel file:', err)
+      toast.error('Failed to cancel file processing')
+    }
+  }
+
+// Handle loading state
   if (loading) {
     return <Loading message="Loading processing queue..." showWaveform />
   }
@@ -244,45 +254,45 @@ const ProcessingCard = ({ file, onRetry, onCancel }) => {
         <div className={cn(
           "w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0",
           file.status === "processing" ? "processing-pulse" : "bg-gradient-to-br from-primary to-secondary"
-        )}>
+)}>
           <ApperIcon 
-            name={getStatusIcon(file.status)} 
+            name={getStatusIcon(file?.status)} 
             className="w-8 h-8 text-white" 
           />
         </div>
 
         {/* File Info */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center space-x-3 mb-2">
+<div className="flex items-center space-x-3 mb-2">
             <h3 className="text-lg font-semibold text-gray-900 truncate">
-              {file.name}
+              {file?.name || 'Unknown file'}
             </h3>
-            <Badge variant={getStatusColor(file.status)}>
-              {file.status}
+            <Badge variant={getStatusColor(file?.status)}>
+              {file?.status || 'unknown'}
             </Badge>
           </div>
 
           <div className="flex items-center space-x-6 text-sm text-gray-600 mb-3">
-            <div className="flex items-center space-x-1">
+<div className="flex items-center space-x-1">
               <ApperIcon name="Clock" className="w-4 h-4" />
-              <span>{formatDuration(file.duration)}</span>
+              <span>{formatDuration(file?.duration)}</span>
             </div>
             <div className="flex items-center space-x-1">
               <ApperIcon name="HardDrive" className="w-4 h-4" />
-              <span>{formatFileSize(file.size)}</span>
+              <span>{formatFileSize(file?.size)}</span>
             </div>
             <div className="flex items-center space-x-1">
               <ApperIcon name="FileType" className="w-4 h-4" />
-              <span className="uppercase">{file.format}</span>
+              <span className="uppercase">{file?.format || 'unknown'}</span>
             </div>
             <div className="flex items-center space-x-1">
               <ApperIcon name="Calendar" className="w-4 h-4" />
-              <span>{formatDate(file.uploadDate)}</span>
+              <span>{formatDate(file?.uploadDate)}</span>
             </div>
           </div>
 
-          {/* Progress Bar */}
-          {(file.status === "processing" || file.status === "completed") && (
+{/* Progress Bar */}
+          {(file?.status === "processing" || file?.status === "completed") && (
             <div className="mb-3">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-sm font-medium text-gray-700">Progress</span>
@@ -297,15 +307,15 @@ const ProcessingCard = ({ file, onRetry, onCancel }) => {
             </div>
           )}
 
-          {/* Estimated Time */}
-          {file.status === "processing" && (
+{/* Estimated Time */}
+          {file?.status === "processing" && (
             <p className="text-sm text-gray-600">
               Estimated time remaining: {Math.max(1, Math.round((100 - progress) / 10))} minutes
             </p>
           )}
 
           {/* Error Message */}
-          {file.status === "failed" && (
+          {file?.status === "failed" && (
             <p className="text-sm text-error">
               Transcription failed. Please try again or check your API configuration.
             </p>
@@ -313,8 +323,8 @@ const ProcessingCard = ({ file, onRetry, onCancel }) => {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center space-x-2 flex-shrink-0">
-          {file.status === "failed" && (
+<div className="flex items-center space-x-2 flex-shrink-0">
+          {file?.status === "failed" && (
             <Button
               onClick={onRetry}
               variant="primary"
@@ -325,7 +335,7 @@ const ProcessingCard = ({ file, onRetry, onCancel }) => {
             </Button>
           )}
           
-          {(file.status === "queued" || file.status === "failed") && (
+          {(file?.status === "queued" || file?.status === "failed") && (
             <Button
               onClick={onCancel}
               variant="outline"
@@ -335,10 +345,9 @@ const ProcessingCard = ({ file, onRetry, onCancel }) => {
               Cancel
             </Button>
           )}
-
-          {file.status === "completed" && (
+{file?.status === "completed" && (
             <Button
-              onClick={() => window.location.href = `/transcript/${file.Id}`}
+              onClick={() => window.location.href = `/transcript/${file?.Id}`}
               variant="primary"
               size="sm"
             >
